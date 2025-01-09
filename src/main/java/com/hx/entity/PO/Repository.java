@@ -20,12 +20,9 @@ public class Repository {
     private Long id;
     @TableField("repository_name")
     private String name;
-    @TableField("repository_visibility")
-    private String visibility;
     private static final long serialVersionUID = 1L;
 
-    public Repository(String name, String visibility) {
+    public Repository(String name) {
         this.name = name;
-        this.visibility = visibility;
     }
 }

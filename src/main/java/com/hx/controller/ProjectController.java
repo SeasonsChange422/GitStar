@@ -24,18 +24,18 @@ public class ProjectController {
         return projectService.newProject(newProjectDTO,token);
     }
     @UserAuth
-    @ProjectAuth(operability = true)
+    @ProjectAuth(checkOperability = true)
     @PostMapping("/api/project/delProject")
     public Result delProject(@RequestBody DelProjectDTO delProjectDTO){
         return projectService.delProject(delProjectDTO.getProjectId());
     }
     @UserAuth
-    @ProjectAuth(operability = true)
+    @ProjectAuth(checkOperability = true)
     @PostMapping("/api/project/updateProject")
     public Result updateProject(@RequestBody UpdateProjectDTO updateProjectDTO){
         return projectService.updateProject(updateProjectDTO);
     }
-    @ProjectAuth(visibility = true)
+    @ProjectAuth(checkVisibility = true)
     @GetMapping("/api/project/getProjectInfo")
     public Result getProjectInfo(@RequestParam Long projectId){
         return projectService.getProjectInfo(projectId);

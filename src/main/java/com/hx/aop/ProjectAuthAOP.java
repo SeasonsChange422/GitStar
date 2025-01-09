@@ -5,13 +5,18 @@ import com.hx.aop.annotation.ProjectAuth;
 import com.hx.aop.annotation.UserAuth;
 import com.hx.common.Result;
 import com.hx.common.enums.AppHttpCodeEnum;
+import com.hx.common.enums.CheckObjectEnum;
 import com.hx.common.enums.UserProjectAuthEnum;
 import com.hx.entity.DTO.project.DelProjectDTO;
 import com.hx.entity.DTO.project.UpdateProjectDTO;
 
+import com.hx.entity.DTO.repository.DelRepositoryDTO;
+import com.hx.entity.DTO.repository.UpdateRepositoryDTO;
 import com.hx.entity.PO.Project;
+import com.hx.entity.PO.relationship.ProjectRepository;
 import com.hx.entity.PO.relationship.UserProject;
 import com.hx.mapper.ProjectMapper;
+import com.hx.mapper.relationship.ProjectRepositoryMapper;
 import com.hx.mapper.relationship.UserProjectMapper;
 import com.hx.utils.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +46,8 @@ public class ProjectAuthAOP {
     @Autowired
     private UserProjectMapper userProjectMapper;
     @Autowired
+    private ProjectRepositoryMapper projectRepositoryMapper;
+    @Autowired
     private ProjectMapper projectMapper;
     @Pointcut("@annotation(com.hx.aop.annotation.ProjectAuth)")
     public void projectPointCut(){
@@ -52,10 +59,18 @@ public class ProjectAuthAOP {
         MethodSignature ms = (MethodSignature)point.getSignature();
         Method method = aClass.getDeclaredMethod(ms.getName(),ms.getParameterTypes());
         ProjectAuth annotation = method.getAnnotation(ProjectAuth.class);
-        boolean operability = annotation.operability();
-        boolean visibility = annotation.visibility();
+        boolean operability = annotation.checkOperability();
+        boolean visibility = annotation.checkVisibility();
+        CheckObjectEnum checkObjectEnum = annotation.checkObject();
+        Long projectId = null;
         Object[] args = point.getArgs();
-        Long projectId = getProjectIdFromArgs(args);
+        if(checkObjectEnum == CheckObjectEnum.CHECK_PROJECT){
+            projectId = getProjectIdFromArgs(args);
+        } else if(checkObjectEnum==CheckObjectEnum.CHECK_REPOSITORY){
+            Long repositoryId = getRepositoryIdFromArgs(args);
+            ProjectRepository projectRepository = projectRepositoryMapper.selectOne(new QueryWrapper<ProjectRepository>().eq("repository_id",repositoryId));
+            projectId = projectRepository.getProjectId();
+        }
         if (projectId == null) {
             return Result.errorResult(AppHttpCodeEnum.PARAM_ERROR);
         }
@@ -100,6 +115,18 @@ public class ProjectAuthAOP {
                 return ((DelProjectDTO) arg).getProjectId();
             } else if (arg instanceof UpdateProjectDTO) {
                 return ((UpdateProjectDTO) arg).getProjectId();
+            } else if(arg instanceof Long) {
+                return (Long) args[0];
+            }
+        }
+        return null;
+    }
+    private Long getRepositoryIdFromArgs(Object[] args){
+        for (Object arg : args) {
+            if (arg instanceof DelRepositoryDTO) {
+                return ((DelRepositoryDTO) arg).getRepositoryId();
+            } else if (arg instanceof UpdateRepositoryDTO) {
+                return ((UpdateRepositoryDTO) arg).getRepositoryId();
             } else if(arg instanceof Long) {
                 return (Long) args[0];
             }

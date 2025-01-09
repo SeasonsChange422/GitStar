@@ -1,5 +1,6 @@
 package com.hx.aop.annotation;
 
+import com.hx.common.enums.CheckObjectEnum;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;
@@ -14,6 +15,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 public @interface ProjectAuth {
-    boolean operability() default false;
-    boolean visibility() default false;
+    boolean checkOperability() default false;
+    boolean checkVisibility() default false;
+    CheckObjectEnum checkObject() default CheckObjectEnum.CHECK_PROJECT;
 }
