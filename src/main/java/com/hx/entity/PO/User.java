@@ -3,7 +3,11 @@ package com.hx.entity.PO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * @author dhx
@@ -11,8 +15,10 @@ import lombok.Data;
  */
 @TableName("gitstar_user")
 @Data
-public class User {
-    @TableId
+@AllArgsConstructor
+@NoArgsConstructor
+public class User implements Serializable {
+    @TableId("user_id")
     private Long id;
     @TableField("user_username")
     private String username;
@@ -26,4 +32,13 @@ public class User {
     private String avatar;
     @TableField("user_description")
     private String description;
+    private static final long serialVersionUID = 1L;
+    public User(String username, String email, String password, String nickname, String avatar, String description) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.avatar = avatar;
+        this.description = description;
+    }
 }

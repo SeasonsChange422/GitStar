@@ -3,7 +3,9 @@ package com.hx.entity.PO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author dhx
@@ -11,11 +13,19 @@ import lombok.Data;
  */
 @TableName("gitstar_repository")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Repository {
-    @TableId
+    @TableId("repository_id")
     private Long id;
     @TableField("repository_name")
     private String name;
     @TableField("repository_visibility")
     private String visibility;
+    private static final long serialVersionUID = 1L;
+
+    public Repository(String name, String visibility) {
+        this.name = name;
+        this.visibility = visibility;
+    }
 }
