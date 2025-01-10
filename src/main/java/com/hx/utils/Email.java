@@ -21,8 +21,6 @@ public class Email {
     public static void sendMail(String to, String vcode) throws Exception {
         if(username==null)
             init();
-        System.out.println(username);
-        System.out.println(password);
         String host = "smtp.qq.com";
 
         Properties props = System.getProperties();

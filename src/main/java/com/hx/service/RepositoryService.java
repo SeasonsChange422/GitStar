@@ -10,7 +10,7 @@ import com.hx.entity.DTO.repository.UpdateRepositoryDTO;
  * @date 2025/1/8 16:31
  */
 public interface RepositoryService {
-    public Result newRepository(NewRepositoryDTO newRepositoryDTO,String token);
+    public Result newRepository(NewRepositoryDTO newRepositoryDTO);
     public Result delRepository(Long repositoryId);
     public Result updateRepository(UpdateRepositoryDTO updateRepositoryDTO);
     public Result getRepositoryInfo(Long repositoryId);

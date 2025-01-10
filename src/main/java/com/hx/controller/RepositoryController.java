@@ -20,25 +20,26 @@ public class RepositoryController {
     @Autowired
     private RepositoryService repositoryService;
     @UserAuth
+    @ProjectAuth(checkOperability = true,checkObject = CheckObjectEnum.CHECK_REPOSITORY)
     @PostMapping("/api/repository/newRepository")
-    public Result newProject(@RequestBody NewRepositoryDTO newRepositoryDTO, @RequestHeader("token")String token){
-        return repositoryService.newRepository(newRepositoryDTO,token);
+    public Result newRepository(@RequestBody NewRepositoryDTO newRepositoryDTO){
+        return repositoryService.newRepository(newRepositoryDTO);
     }
     @UserAuth
     @ProjectAuth(checkOperability = true,checkObject = CheckObjectEnum.CHECK_REPOSITORY)
     @PostMapping("/api/repository/delRepository")
-    public Result delProject(@RequestBody DelRepositoryDTO delRepositoryDTO){
+    public Result delRepository(@RequestBody DelRepositoryDTO delRepositoryDTO){
         return repositoryService.delRepository(delRepositoryDTO.getRepositoryId());
     }
     @UserAuth
     @ProjectAuth(checkOperability = true,checkObject = CheckObjectEnum.CHECK_REPOSITORY)
     @PostMapping("/api/repository/updateRepository")
-    public Result updateProject(@RequestBody UpdateRepositoryDTO updateRepositoryDTO){
+    public Result updateRepository(@RequestBody UpdateRepositoryDTO updateRepositoryDTO){
         return repositoryService.updateRepository(updateRepositoryDTO);
     }
     @ProjectAuth(checkVisibility = true,checkObject = CheckObjectEnum.CHECK_REPOSITORY)
     @GetMapping("/api/repository/getRepositoryInfo")
-    public Result getProjectInfo(@RequestParam Long projectId){
-        return repositoryService.getRepositoryInfo(projectId);
+    public Result getRepositoryInfo(@RequestParam Long repositoryId){
+        return repositoryService.getRepositoryInfo(repositoryId);
     }
 }
