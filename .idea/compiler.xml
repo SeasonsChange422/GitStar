@@ -6,13 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="GitStar" />
+        <module name="git-star-common" />
+        <module name="git-star-file" />
+        <module name="git-star-app" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="GitStar" options="-parameters" />
+      <module name="git-star-app" options="-parameters" />
+      <module name="git-star-common" options="-parameters" />
+      <module name="git-star-file" options="-parameters" />
     </option>
   </component>
 </project>
