@@ -12,10 +12,11 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.6</version>
     </parent>
+
     <modules>
-        <module>git-star-app</module>
         <module>git-star-file</module>
         <module>git-star-common</module>
+        <module>git-star-application</module>
     </modules>
 
     <name>GitStar</name>
@@ -29,11 +30,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.75</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>fastjson</artifactId>-->
+<!--            <version>2.0.39</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.qcloud</groupId>
             <artifactId>cos_api</artifactId>
@@ -65,12 +66,12 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-            <scope>true</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -112,5 +113,6 @@
             <version>0.11.2</version>
             <scope>runtime</scope>
         </dependency>
+
     </dependencies>
 </project>

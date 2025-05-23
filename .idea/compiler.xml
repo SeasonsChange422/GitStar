@@ -2,20 +2,25 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="git-star-common" />
+        <module name="git-star-application" />
         <module name="git-star-file" />
-        <module name="git-star-app" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="git-star-app" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="GitStar" options="-parameters" />
+      <module name="GitStar" options="" />
       <module name="git-star-app" options="-parameters" />
+      <module name="git-star-application" options="-parameters" />
       <module name="git-star-common" options="-parameters" />
       <module name="git-star-file" options="-parameters" />
     </option>
